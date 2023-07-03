@@ -1,0 +1,140 @@
+openapi: 3.0.3
+
+info:
+  title: Recipe
+  description: Recipe servise
+  version: 1.0.0
+
+servers:
+  - url: "https://localhost:8000"
+
+paths:
+
+  "/api/recipe/c/create":
+    post:
+      tags:
+        - recipe
+      summary: Create recipe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Recipe"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecipeWithId"
+
+  "/api/recipe/c/update":
+    post:
+      tags:
+        - recipe
+      summary: Update recipe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecipeWithId"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecipeWithId"
+
+  "/api/recipe/c/delete":
+    post:
+      tags:
+        - recipe
+      summary: Update recipe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Id"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Id"
+
+  "/api/recipe/q/list":
+    post:
+      tags:
+        - recipe
+      summary: List recipes
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Recipes"
+
+  "/api/recipe/q/read":
+    post:
+      tags:
+        - recipe
+      summary: Read recipe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Recipe"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Recipes"
+
+components:
+  schemas:
+
+    Id:
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          format: uuid
+
+    Recipe:
+      required:
+        - title
+        - description
+        - ingredients
+        - steps
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        ingredients:
+          type: array
+          items:
+            type: string
+        steps:
+          type: array
+          items:
+            type: string
+
+    RecipeWithId:
+      allOf:
+        - $ref: '#/components/schemas/Id'
+        - $ref: '#/components/schemas/Recipe'
+
+    Recipes:
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecipeWithId'

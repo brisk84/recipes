@@ -1,0 +1,94 @@
+@apil=http://localhost:8000
+
+###
+GET {{apil}}/health
+
+###
+POST {{apil}}/api/recipe/c/create
+Content-Type: application/json
+
+{
+  "title": "Tom Collins",
+  "description": "The Tom Collins is a classic summer highball that's perfect for the golf course or a backyard barbecue, made from gin, lemon juice, simple syrup, and club soda. The Tom Collins is served in, you guessed it, a Collins glass, which is narrower than a typical highball. A nice side effect of this glassware is that when you tilt the drink all the way back to get those last few drops, the ice is a lot less likely to spill down the front of your shirt. But hey, come July, that might not be so bad!The origins of the Tom Collins recipe is a bit murky, but it seems likely that it was invented in England sometime in the early 19th century. That said, the Tom Collins cocktail first appeared in print in the 1876 edition of American barman Jerry Thomas' How to Mix Drinks.For a quick changeup, use vodka in place of gin, and you get the easygoing Vodka Collins.",
+  "ingredients": [
+    "2 oz gin",
+    "1 oz lemon juice",
+    "0.25 oz simple syrup",
+    "Club soda",
+    "Maraschino cherry and lemon slice for garnish"
+  ],
+  "steps": [
+    "Add the gin, lemon juice, and simple syrup to a Collins glass filled with ice.",
+    "Stir.",
+    "Fill the rest of the class with club soda.",
+    "Garnish with a cherry and lemon slice and serve."
+  ]
+}
+
+###
+POST {{apil}}/api/recipe/c/update
+Content-Type: application/json
+
+{
+  "id": "5eba404c-19d8-11ee-af56-047c165324e7",
+  "title": "Tom Collins123",
+  "description": "The Tom Collins is a classic summer highball that's perfect for the golf course or a backyard barbecue, made from gin, lemon juice, simple syrup, and club soda. The Tom Collins is served in, you guessed it, a Collins glass, which is narrower than a typical highball. A nice side effect of this glassware is that when you tilt the drink all the way back to get those last few drops, the ice is a lot less likely to spill down the front of your shirt. But hey, come July, that might not be so bad!The origins of the Tom Collins recipe is a bit murky, but it seems likely that it was invented in England sometime in the early 19th century. That said, the Tom Collins cocktail first appeared in print in the 1876 edition of American barman Jerry Thomas' How to Mix Drinks.For a quick changeup, use vodka in place of gin, and you get the easygoing Vodka Collins.",
+  "ingredients": [
+    "2 oz gin",
+    "1 oz lemon juice",
+    "0.25 oz simple syrup",
+    "Club soda",
+    "Maraschino cherry and lemon slice for garnish"
+  ],
+  "steps": [
+    "Add the gin, lemon juice, and simple syrup to a Collins glass filled with ice.",
+    "Stir.",
+    "Fill the rest of the class with club soda.",
+    "Garnish with a cherry and lemon slice and serve."
+  ]
+}
+
+###
+POST {{apil}}/api/recipe/c/create
+Content-Type: application/json
+
+{
+  "title": "Tom Collins",
+  "description": "The Tom Collins is a classic summer highball that's perfect for the golf course or a backyard barbecue, made from gin, lemon juice, simple syrup, and club soda. The Tom Collins is served in, you guessed it, a Collins glass, which is narrower than a typical highball. A nice side effect of this glassware is that when you tilt the drink all the way back to get those last few drops, the ice is a lot less likely to spill down the front of your shirt. But hey, come July, that might not be so bad!The origins of the Tom Collins recipe is a bit murky, but it seems likely that it was invented in England sometime in the early 19th century. That said, the Tom Collins cocktail first appeared in print in the 1876 edition of American barman Jerry Thomas' How to Mix Drinks.For a quick changeup, use vodka in place of gin, and you get the easygoing Vodka Collins.",
+  "ingredients": [
+    "2 oz gin",
+    "1 oz lemon juice",
+    "0.25 oz simple syrup",
+    "Club soda",
+    "Maraschino cherry and lemon slice for garnish"
+  ],
+  "steps": [
+    "Add the gin, lemon juice, and simple syrup to a Collins glass filled with ice.",
+    "Stir.",
+    "Fill the rest of the class with club soda.",
+    "Garnish with a cherry and lemon slice and serve."
+  ]
+}
+
+###
+POST {{apil}}/api/recipe/c/delete
+Content-Type: application/json
+
+{
+    "id": "38105bd1-19d3-11ee-88f9-047c165324e7"
+}
+
+###
+POST {{apil}}/api/recipe/q/list
+Content-Type: application/json
+
+{
+}
+
+###
+POST {{apil}}/api/recipe/q/read
+Content-Type: application/json
+
+{
+    "id": "5eba404c-19d8-11ee-af56-047c165324e7"
+}

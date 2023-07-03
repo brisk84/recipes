@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  db:
+    restart: always
+    container_name: db
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata1:/var/lib/postgresql/data
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: sqlRec1pe58
+      POSTGRES_DB: recipes
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d postgres" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  recipes:
+    restart: always
+    container_name: recipes
+    build:
+      context: ./..
+      dockerfile: Dockerfile_recipes
+    command: sh -c "sleep 10 && /usr/local/bin/app"
+    ports:
+      # - 8000:8000
+      - "8000"
+    # network_mode: host
+    depends_on:
+      - db
+
+volumes:
+  pgdata1:
