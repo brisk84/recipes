@@ -1,4 +1,4 @@
 {
-    "server_address": ":8000"
-  }
-  
+    "server_address": ":8000",
+    "pg_uri": "postgresql://localhost/recipes?user=postgres&password=sqlRec1pe58&sslmode=disable"
+}

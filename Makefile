@@ -12,6 +12,9 @@ build: deps
 generate:
 	cd api; oapi-codegen --package=api --generate types,gorilla -o recipes-srv.gen.go recipes.yml; cd ..
 
+docker_build:
+	docker-compose -f deploy/docker-compose.yml build
+
 up:
 	docker-compose -f deploy/docker-compose.yml up -d
 

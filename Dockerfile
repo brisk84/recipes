@@ -16,4 +16,5 @@ FROM alpine:latest AS target
 RUN apk add --no-cache tzdata
 ENV TZ=Europe/Moscow
 COPY --from=build /var/lib/app /usr/local/bin/app
-ENTRYPOINT /usr/local/bin/app
+CMD /usr/local/bin/app
+#ENTRYPOINT /usr/local/bin/app

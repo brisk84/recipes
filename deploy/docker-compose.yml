@@ -7,6 +7,7 @@ services:
     image: postgres
     ports:
       - 5432:5432
+    # network_mode: host
     volumes:
       - pgdata1:/var/lib/postgresql/data
     environment:
@@ -25,14 +26,12 @@ services:
     container_name: recipes
     build:
       context: ./..
-      dockerfile: Dockerfile_recipes
-    command: sh -c "sleep 10 && /usr/local/bin/app"
-    ports:
-      # - 8000:8000
-      - "8000"
-    # network_mode: host
+      dockerfile: Dockerfile
+    command: sh -c "/usr/local/bin/app"
+    network_mode: host
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
 volumes:
   pgdata1:
