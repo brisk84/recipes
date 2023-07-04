@@ -119,16 +119,23 @@ func (s *storage) ReadRecipe(ctx context.Context, req domain.ID) (domain.Recipe,
 func (s *storage) FindRecipe(ctx context.Context, req domain.Query) ([]domain.Recipe, error) {
 	q01 := `select id, title, description, ingredients, steps, total_time from recipes
 				where $1 <@ ingredients and del_dt is null`
-	// q02 := ` and total_time < $2`
-	// q03 := ` order by total_time $3`
+	q02 := ` and total_time <= $2`
+	q03 := ` order by total_time `
 
 	var rows *sql.Rows
 	var err error
-	// q04 := q01
-	// if req.MaxTime > 0 {
-	// 	q04 += q02
-	// }
-	rows, err = s.db.QueryContext(ctx, q01, pq.Array(req.Ingredients))
+	q04 := q01
+	if req.MaxTime > 0 {
+		q04 += q02
+	}
+	if req.SortByTime != "" {
+		q04 += q03 + req.SortByTime
+	}
+	if req.MaxTime > 0 {
+		rows, err = s.db.QueryContext(ctx, q04, pq.Array(req.Ingredients), req.MaxTime)
+	} else {
+		rows, err = s.db.QueryContext(ctx, q04, pq.Array(req.Ingredients))
+	}
 	if err != nil {
 		return nil, fmt.Errorf("s.db.QueryContext: %w", err)
 	}

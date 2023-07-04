@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"fmt"
 	"recipes/api"
 )
 
@@ -21,6 +20,5 @@ func (q *Query) FromApi(req api.Query) error {
 	if req.SortByTime != nil {
 		q.SortByTime = string(*req.SortByTime)
 	}
-	fmt.Println(q)
 	return nil
 }

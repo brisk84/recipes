@@ -140,6 +140,6 @@ Content-Type: application/json
     "2 oz gin",
     "Club soda"
   ],
-  "max_time": 120,
-  "sort_by_time": "asc"
+  "max_time": 50,
+  "sort_by_time": "desc"
 }
