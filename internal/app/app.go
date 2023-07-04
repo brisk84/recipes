@@ -9,6 +9,8 @@ import (
 	"recipes/internal/storage"
 	"recipes/internal/usecase"
 	"recipes/pkg/logger"
+
+	"github.com/redis/go-redis/v9"
 )
 
 type App struct {
@@ -26,7 +28,11 @@ func New(lg logger.Logger, cfg config.Config) (*App, error) {
 		return nil, fmt.Errorf("usecase: %w", err)
 	}
 
-	h := handler.New(lg, uc)
+	rcli := redis.NewClient(&redis.Options{
+		Addr: cfg.RedisAddr,
+	})
+
+	h := handler.New(lg, uc, rcli)
 	srv := server.New(lg, cfg.AppAddr, h)
 
 	return &App{

@@ -4,7 +4,20 @@
 GET {{apil}}/health
 
 ###
+# @name auth
+POST {{apil}}/api/user/c/signin
+Content-Type: application/json
+
+{
+  "login": "user01",
+  "password": "pass01"
+}
+
+@token = {{auth.response.body.auth_token}}
+
+###
 POST {{apil}}/api/recipe/c/create
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -39,6 +52,7 @@ Content-Type: application/json
 
 ###
 POST {{apil}}/api/recipe/c/update
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -75,6 +89,7 @@ Content-Type: application/json
 
 ###
 POST {{apil}}/api/recipe/c/create
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -110,6 +125,7 @@ Content-Type: application/json
 
 ###
 POST {{apil}}/api/recipe/c/delete
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {

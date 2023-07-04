@@ -10,6 +10,22 @@ servers:
 
 paths:
 
+  "/api/user/c/signin":
+    post:
+      tags:
+        - recipe
+      summary: Sign in
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        200:
+          description: OK
+        403:
+          description: Forbidden
+
   "/api/recipe/c/create":
     post:
       tags:
@@ -123,6 +139,16 @@ components:
         id:
           type: string
           format: uuid
+
+    User:
+      required:
+        - login
+        - password
+      properties:
+        login:
+          type: string
+        password:
+          type: string
 
     Step:
       required:

@@ -7,6 +7,12 @@ import (
 )
 
 func (h *Handler) PostApiRecipeCCreate(w http.ResponseWriter, r *http.Request) {
+	sd := r.Context().Value("SessionData")
+	if sd == nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+
 	req, err := parseRequest[api.Recipe](r)
 	if err != nil {
 		h.lg.Errorln(err)
@@ -30,6 +36,11 @@ func (h *Handler) PostApiRecipeCCreate(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) PostApiRecipeCUpdate(w http.ResponseWriter, r *http.Request) {
+	sd := r.Context().Value("SessionData")
+	if sd == nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
 	req, err := parseRequest[api.RecipeWithId](r)
 	if err != nil {
 		h.lg.Errorln(err)
@@ -53,6 +64,11 @@ func (h *Handler) PostApiRecipeCUpdate(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) PostApiRecipeCDelete(w http.ResponseWriter, r *http.Request) {
+	sd := r.Context().Value("SessionData")
+	if sd == nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
 	req, err := parseRequest[api.Id](r)
 	if err != nil {
 		h.lg.Errorln(err)

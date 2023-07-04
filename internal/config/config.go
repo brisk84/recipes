@@ -12,8 +12,9 @@ import (
 var fsett embed.FS
 
 type Config struct {
-	AppAddr string `env:"SERVER_ADDRESS" envDefault:":80" json:"server_address"`
-	PgURI   string `env:"PG_URI"                          json:"pg_uri"`
+	AppAddr   string `env:"SERVER_ADDRESS" envDefault:":80"   json:"server_address"`
+	PgURI     string `env:"PG_URI"                            json:"pg_uri"`
+	RedisAddr string `env:"REDIS_ADDR"     envDefault:":6379" json:"redis_addr"`
 }
 
 func New() (Config, error) {

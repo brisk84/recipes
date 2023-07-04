@@ -6,11 +6,14 @@ import (
 	"net/http"
 	"recipes/domain"
 	"recipes/pkg/logger"
+
+	"github.com/redis/go-redis/v9"
 )
 
 type Handler struct {
 	lg logger.Logger
 	uc useCase
+	rc *redis.Client
 }
 
 type useCase interface {
@@ -20,12 +23,14 @@ type useCase interface {
 	ListRecipes(ctx context.Context) ([]domain.Recipe, error)
 	ReadRecipe(ctx context.Context, req domain.ID) (domain.Recipe, error)
 	FindRecipe(ctx context.Context, req domain.Query) ([]domain.Recipe, error)
+	SignIn(ctx context.Context, req domain.User) (domain.User, bool, error)
 }
 
-func New(lg logger.Logger, useCase useCase) *Handler {
+func New(lg logger.Logger, useCase useCase, rcli *redis.Client) *Handler {
 	return &Handler{
 		lg: lg,
 		uc: useCase,
+		rc: rcli,
 	}
 }
 

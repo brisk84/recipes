@@ -2,15 +2,15 @@ package router
 
 import (
 	"net/http"
-	"recipes/internal/handler"
-
 	"recipes/api"
+	"recipes/internal/handler"
 
 	"github.com/gorilla/mux"
 )
 
 func New(h *handler.Handler) http.Handler {
 	r := mux.NewRouter()
+	r.Use(h.AuthMiddleware)
 	r.Use(SetJSONHeader)
 	r.HandleFunc("/health", h.HealthCheck).Methods(http.MethodGet)
 	apiRouter := api.HandlerWithOptions(h, api.GorillaServerOptions{BaseRouter: r})

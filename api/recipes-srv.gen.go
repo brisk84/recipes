@@ -62,6 +62,12 @@ type Step struct {
 	Title string `json:"title"`
 }
 
+// User defines model for User.
+type User struct {
+	Login    string `json:"login"`
+	Password string `json:"password"`
+}
+
 // PostApiRecipeCCreateJSONRequestBody defines body for PostApiRecipeCCreate for application/json ContentType.
 type PostApiRecipeCCreateJSONRequestBody = Recipe
 
@@ -76,6 +82,9 @@ type PostApiRecipeQFindJSONRequestBody = Query
 
 // PostApiRecipeQReadJSONRequestBody defines body for PostApiRecipeQRead for application/json ContentType.
 type PostApiRecipeQReadJSONRequestBody = Recipe
+
+// PostApiUserCSigninJSONRequestBody defines body for PostApiUserCSignin for application/json ContentType.
+type PostApiUserCSigninJSONRequestBody = User
 
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
@@ -97,6 +106,9 @@ type ServerInterface interface {
 	// Read recipe
 	// (POST /api/recipe/q/read)
 	PostApiRecipeQRead(w http.ResponseWriter, r *http.Request)
+	// Sign in
+	// (POST /api/user/c/signin)
+	PostApiUserCSignin(w http.ResponseWriter, r *http.Request)
 }
 
 // ServerInterfaceWrapper converts contexts to parameters.
@@ -189,6 +201,21 @@ func (siw *ServerInterfaceWrapper) PostApiRecipeQRead(w http.ResponseWriter, r *
 
 	var handler = func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.PostApiRecipeQRead(w, r)
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler(w, r.WithContext(ctx))
+}
+
+// PostApiUserCSignin operation middleware
+func (siw *ServerInterfaceWrapper) PostApiUserCSignin(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var handler = func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.PostApiUserCSignin(w, r)
 	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -322,6 +349,8 @@ func HandlerWithOptions(si ServerInterface, options GorillaServerOptions) http.H
 	r.HandleFunc(options.BaseURL+"/api/recipe/q/list", wrapper.PostApiRecipeQList).Methods("POST")
 
 	r.HandleFunc(options.BaseURL+"/api/recipe/q/read", wrapper.PostApiRecipeQRead).Methods("POST")
+
+	r.HandleFunc(options.BaseURL+"/api/user/c/signin", wrapper.PostApiUserCSignin).Methods("POST")
 
 	return r
 }
