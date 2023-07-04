@@ -19,6 +19,7 @@ type useCase interface {
 	DeleteRecipe(ctx context.Context, req domain.ID) (domain.ID, error)
 	ListRecipes(ctx context.Context) ([]domain.Recipe, error)
 	ReadRecipe(ctx context.Context, req domain.ID) (domain.Recipe, error)
+	FindRecipe(ctx context.Context, req domain.Query) ([]domain.Recipe, error)
 }
 
 func New(lg logger.Logger, useCase useCase) *Handler {

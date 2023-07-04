@@ -107,3 +107,26 @@ func (h *Handler) PostApiRecipeQRead(w http.ResponseWriter, r *http.Request) {
 	}
 	sendResponse(w, ret, nil)
 }
+
+func (h *Handler) PostApiRecipeQFind(w http.ResponseWriter, r *http.Request) {
+	req, err := parseRequest[api.Query](r)
+	if err != nil {
+		h.lg.Errorln(err)
+		sendResponse[NilType](w, nil, err)
+		return
+	}
+	var reqd domain.Query
+	err = reqd.FromApi(req)
+	if err != nil {
+		h.lg.Errorln(err)
+		sendResponse[NilType](w, nil, err)
+		return
+	}
+	ret, err := h.uc.FindRecipe(r.Context(), reqd)
+	if err != nil {
+		h.lg.Errorln(err)
+		sendResponse[NilType](w, nil, err)
+		return
+	}
+	sendResponse(w, ret, nil)
+}

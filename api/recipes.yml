@@ -95,6 +95,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/Recipes"
 
+  "/api/recipe/q/find":
+    post:
+      tags:
+        - recipe
+      summary: Find recipe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Query"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Recipes"
+
 components:
   schemas:
 
@@ -106,12 +124,23 @@ components:
           type: string
           format: uuid
 
+    Step:
+      required:
+        - title
+        - time
+      properties:
+        title:
+          type: string
+        time:
+          type: integer
+
     Recipe:
       required:
         - title
         - description
         - ingredients
         - steps
+        - total_time
       type: object
       properties:
         title:
@@ -125,7 +154,9 @@ components:
         steps:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Step'
+        total_time:
+          type: integer
 
     RecipeWithId:
       allOf:
@@ -138,3 +169,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RecipeWithId'
+
+    Query:
+      type: object
+      properties:
+        ingredients:
+          type: array
+          items:
+            type: string
+        max_time:
+          type: integer
+        sort_by_time:
+          type: string
+          enum:
+            - asc
+            - desc

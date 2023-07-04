@@ -11,17 +11,34 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Defines values for QuerySortByTime.
+const (
+	Asc  QuerySortByTime = "asc"
+	Desc QuerySortByTime = "desc"
+)
+
 // Id defines model for Id.
 type Id struct {
 	Id openapi_types.UUID `json:"id"`
 }
 
+// Query defines model for Query.
+type Query struct {
+	Ingredients *[]string        `json:"ingredients,omitempty"`
+	MaxTime     *int             `json:"max_time,omitempty"`
+	SortByTime  *QuerySortByTime `json:"sort_by_time,omitempty"`
+}
+
+// QuerySortByTime defines model for Query.SortByTime.
+type QuerySortByTime string
+
 // Recipe defines model for Recipe.
 type Recipe struct {
 	Description string   `json:"description"`
 	Ingredients []string `json:"ingredients"`
-	Steps       []string `json:"steps"`
+	Steps       []Step   `json:"steps"`
 	Title       string   `json:"title"`
+	TotalTime   int      `json:"total_time"`
 }
 
 // RecipeWithId defines model for RecipeWithId.
@@ -29,13 +46,20 @@ type RecipeWithId struct {
 	Description string             `json:"description"`
 	Id          openapi_types.UUID `json:"id"`
 	Ingredients []string           `json:"ingredients"`
-	Steps       []string           `json:"steps"`
+	Steps       []Step             `json:"steps"`
 	Title       string             `json:"title"`
+	TotalTime   int                `json:"total_time"`
 }
 
 // Recipes defines model for Recipes.
 type Recipes struct {
 	Items *[]RecipeWithId `json:"items,omitempty"`
+}
+
+// Step defines model for Step.
+type Step struct {
+	Time  int    `json:"time"`
+	Title string `json:"title"`
 }
 
 // PostApiRecipeCCreateJSONRequestBody defines body for PostApiRecipeCCreate for application/json ContentType.
@@ -46,6 +70,9 @@ type PostApiRecipeCDeleteJSONRequestBody = Id
 
 // PostApiRecipeCUpdateJSONRequestBody defines body for PostApiRecipeCUpdate for application/json ContentType.
 type PostApiRecipeCUpdateJSONRequestBody = RecipeWithId
+
+// PostApiRecipeQFindJSONRequestBody defines body for PostApiRecipeQFind for application/json ContentType.
+type PostApiRecipeQFindJSONRequestBody = Query
 
 // PostApiRecipeQReadJSONRequestBody defines body for PostApiRecipeQRead for application/json ContentType.
 type PostApiRecipeQReadJSONRequestBody = Recipe
@@ -61,6 +88,9 @@ type ServerInterface interface {
 	// Update recipe
 	// (POST /api/recipe/c/update)
 	PostApiRecipeCUpdate(w http.ResponseWriter, r *http.Request)
+	// Find recipe
+	// (POST /api/recipe/q/find)
+	PostApiRecipeQFind(w http.ResponseWriter, r *http.Request)
 	// List recipes
 	// (POST /api/recipe/q/list)
 	PostApiRecipeQList(w http.ResponseWriter, r *http.Request)
@@ -114,6 +144,21 @@ func (siw *ServerInterfaceWrapper) PostApiRecipeCUpdate(w http.ResponseWriter, r
 
 	var handler = func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.PostApiRecipeCUpdate(w, r)
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler(w, r.WithContext(ctx))
+}
+
+// PostApiRecipeQFind operation middleware
+func (siw *ServerInterfaceWrapper) PostApiRecipeQFind(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var handler = func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.PostApiRecipeQFind(w, r)
 	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -271,6 +316,8 @@ func HandlerWithOptions(si ServerInterface, options GorillaServerOptions) http.H
 	r.HandleFunc(options.BaseURL+"/api/recipe/c/delete", wrapper.PostApiRecipeCDelete).Methods("POST")
 
 	r.HandleFunc(options.BaseURL+"/api/recipe/c/update", wrapper.PostApiRecipeCUpdate).Methods("POST")
+
+	r.HandleFunc(options.BaseURL+"/api/recipe/q/find", wrapper.PostApiRecipeQFind).Methods("POST")
 
 	r.HandleFunc(options.BaseURL+"/api/recipe/q/list", wrapper.PostApiRecipeQList).Methods("POST")
 

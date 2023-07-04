@@ -12,6 +12,7 @@ type storage interface {
 	DeleteRecipe(ctx context.Context, req domain.ID) error
 	ListRecipes(ctx context.Context) ([]domain.Recipe, error)
 	ReadRecipe(ctx context.Context, req domain.ID) (domain.Recipe, error)
+	FindRecipe(ctx context.Context, req domain.Query) ([]domain.Recipe, error)
 }
 
 type usecase struct {

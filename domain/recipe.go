@@ -11,7 +11,13 @@ type Recipe struct {
 	Title       string   `json:"title"`
 	Description string   `json:"description"`
 	Ingredients []string `json:"ingredients"`
-	Steps       []string `json:"steps"`
+	Steps       []Step   `json:"steps"`
+	TotalTime   int      `json:"total_time"`
+}
+
+type Step struct {
+	Title string `json:"title"`
+	Time  int    `json:"time"`
 }
 
 func (r *Recipe) FromCreate(req api.Recipe) error {
@@ -19,7 +25,13 @@ func (r *Recipe) FromCreate(req api.Recipe) error {
 	r.Title = req.Title
 	r.Description = req.Description
 	r.Ingredients = req.Ingredients
-	r.Steps = req.Steps
+	for _, v := range req.Steps {
+		r.Steps = append(r.Steps, Step{
+			Title: v.Title,
+			Time:  v.Time,
+		})
+	}
+	r.TotalTime = req.TotalTime
 	return nil
 }
 
@@ -29,6 +41,12 @@ func (r *Recipe) FromUpdate(req api.RecipeWithId) error {
 	r.Title = req.Title
 	r.Description = req.Description
 	r.Ingredients = req.Ingredients
-	r.Steps = req.Steps
+	for _, v := range req.Steps {
+		r.Steps = append(r.Steps, Step{
+			Title: v.Title,
+			Time:  v.Time,
+		})
+	}
+	r.TotalTime = req.TotalTime
 	return nil
 }

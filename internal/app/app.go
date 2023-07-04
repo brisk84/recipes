@@ -17,11 +17,9 @@ type App struct {
 }
 
 func New(lg logger.Logger, cfg config.Config) (*App, error) {
-	fmt.Println(cfg.AppAddr, cfg.PgURI)
 	stor, err := storage.New(lg, cfg)
 	if err != nil {
-		// return nil, fmt.Errorf("storage: %w", err)
-		lg.Infoln(err)
+		return nil, fmt.Errorf("storage: %w", err)
 	}
 	uc, err := usecase.New(lg, cfg, stor)
 	if err != nil {

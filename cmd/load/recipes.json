@@ -1321,148 +1321,130 @@
         ],
         "recipeInstructions": [
             {
-                "@type": "HowToSection",
-                "name": "Prepping Lasagna Ingredients Instructions",
-                "itemListElement": [
-                    {
-                        "@type": "HowToStep",
-                        "text": "Making homemade lasagna is really easy. It has a few steps and it has some work that has to be done but the steps are super simple!",
-                        "name": "Making homemade lasagna is really easy. It has a few steps and it has some work that has to be done but the steps are super simple!",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-0"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Put a pot of water on the stove on high heat and bring to a boil. When the water is boiling add your lasagna noodles and cook according to the package.",
-                        "name": "Put a pot of water on the stove on high heat and bring to a boil. When the water is boiling add your lasagna noodles and cook according to the package.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-1"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "In a small sauce pot add the pasta sauce, oregano and basil and heat thoroughly. Once it is completely heated remove from the heat.",
-                        "name": "In a small sauce pot add the pasta sauce, oregano and basil and heat thoroughly. Once it is completely heated remove from the heat.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-2"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Then cut the chuck roast into 2 inch pieces and place them in the food processor. Grind them with the food processor until you have the texture of ground beef.",
-                        "name": "Then cut the chuck roast into 2 inch pieces and place them in the food processor. Grind them with the food processor until you have the texture of ground beef.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-3"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "In a medium skillet on medium heat, add the ground beef and salt. Cook until the meat is done and then drain your beef on a plate that is lined with paper towels.",
-                        "name": "In a medium skillet on medium heat, add the ground beef and salt. Cook until the meat is done and then drain your beef on a plate that is lined with paper towels.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-4"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "While the ground beef is draining cook the sausage in the same skillet over medium heat.  Once cooked, drain your sausage on a plate that is lined with paper towels.",
-                        "name": "While the ground beef is draining cook the sausage in the same skillet over medium heat.  Once cooked, drain your sausage on a plate that is lined with paper towels.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-5"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Place your ground beef back into the food processor with half of the tomato paste and grind it again. When it is done, remove the ground beef from the food processor and set aside in a bowl.",
-                        "name": "Place your ground beef back into the food processor with half of the tomato paste and grind it again. When it is done, remove the ground beef from the food processor and set aside in a bowl.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-6"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Next add the sausage with the second half of the tomato paste and add to the bowl of ground beef and mix well.",
-                        "name": "Next add the sausage with the second half of the tomato paste and add to the bowl of ground beef and mix well.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-7"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "In a smaller food processor if you have one, or in the same food processor rinsed out add 16 ounces of mozzarella cheese, the eggs and the ricotta cheese and grind.",
-                        "name": "In a smaller food processor if you have one, or in the same food processor rinsed out add 16 ounces of mozzarella cheese, the eggs and the ricotta cheese and grind.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-8"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Pour the cheese mixture into a small bowl and stir in the Parmesan cheese.",
-                        "name": "Pour the cheese mixture into a small bowl and stir in the Parmesan cheese.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-9"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Now all of the lasagna ingredients are prepped and it is time to layer the lasagna!",
-                        "name": "Now all of the lasagna ingredients are prepped and it is time to layer the lasagna!",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-10"
-                    }
-                ]
+                "@type": "HowToStep",
+                "text": "Making homemade lasagna is really easy. It has a few steps and it has some work that has to be done but the steps are super simple!",
+                "name": "Making homemade lasagna is really easy. It has a few steps and it has some work that has to be done but the steps are super simple!",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-0"
             },
             {
-                "@type": "HowToSection",
-                "name": "How To Layer",
-                "itemListElement": [
-                    {
-                        "@type": "HowToStep",
-                        "text": "Spray a 9x13 pan with non stick cooking spray. Then spread out a thin layer of sauce on the bottom of the dish.",
-                        "name": "Spray a 9x13 pan with non stick cooking spray. Then spread out a thin layer of sauce on the bottom of the dish.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-1-0"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Top the noodles with a layer of sauce.",
-                        "name": "Top the noodles with a layer of sauce.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-1-1"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Top the sauce with a layer of meat mixture.",
-                        "name": "Top the sauce with a layer of meat mixture.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-1-2"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Add a layer of the cheese mixture.",
-                        "name": "Add a layer of the cheese mixture.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-1-3"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Repeat the layering until you are at the top of the baking dish.",
-                        "name": "Repeat the layering until you are at the top of the baking dish.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-1-4"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Spread the remaining sauce on top and then sprinkle a cup of mozzarella cheese on top.",
-                        "name": "Spread the remaining sauce on top and then sprinkle a cup of mozzarella cheese on top.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-1-5"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Now you can either put the lasagna in the oven to bake or cover with a layer of tin foil and put it in the fridge for later.",
-                        "name": "Now you can either put the lasagna in the oven to bake or cover with a layer of tin foil and put it in the fridge for later.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-1-6"
-                    }
-                ]
+                "@type": "HowToStep",
+                "text": "Put a pot of water on the stove on high heat and bring to a boil. When the water is boiling add your lasagna noodles and cook according to the package.",
+                "name": "Put a pot of water on the stove on high heat and bring to a boil. When the water is boiling add your lasagna noodles and cook according to the package.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-1"
             },
             {
-                "@type": "HowToSection",
-                "name": "How to Bake Lasagna",
-                "itemListElement": [
-                    {
-                        "@type": "HowToStep",
-                        "text": "Leave the lasagna covered with tin foil and bake in the oven at 375 degrees for 45 minutes.",
-                        "name": "Leave the lasagna covered with tin foil and bake in the oven at 375 degrees for 45 minutes.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-2-0"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Remove the tinfoil and bake for another 15 minutes or until its golden brown.",
-                        "name": "Remove the tinfoil and bake for another 15 minutes or until its golden brown.",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-2-1"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Let it sit for 15 minutes before cutting. (This is VERY IMPORTANT!)",
-                        "name": "Let it sit for 15 minutes before cutting. (This is VERY IMPORTANT!)",
-                        "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-2-2"
-                    }
-                ]
+                "@type": "HowToStep",
+                "text": "In a small sauce pot add the pasta sauce, oregano and basil and heat thoroughly. Once it is completely heated remove from the heat.",
+                "name": "In a small sauce pot add the pasta sauce, oregano and basil and heat thoroughly. Once it is completely heated remove from the heat.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-2"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Then cut the chuck roast into 2 inch pieces and place them in the food processor. Grind them with the food processor until you have the texture of ground beef.",
+                "name": "Then cut the chuck roast into 2 inch pieces and place them in the food processor. Grind them with the food processor until you have the texture of ground beef.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-3"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "In a medium skillet on medium heat, add the ground beef and salt. Cook until the meat is done and then drain your beef on a plate that is lined with paper towels.",
+                "name": "In a medium skillet on medium heat, add the ground beef and salt. Cook until the meat is done and then drain your beef on a plate that is lined with paper towels.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-4"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "While the ground beef is draining cook the sausage in the same skillet over medium heat.  Once cooked, drain your sausage on a plate that is lined with paper towels.",
+                "name": "While the ground beef is draining cook the sausage in the same skillet over medium heat.  Once cooked, drain your sausage on a plate that is lined with paper towels.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-5"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Place your ground beef back into the food processor with half of the tomato paste and grind it again. When it is done, remove the ground beef from the food processor and set aside in a bowl.",
+                "name": "Place your ground beef back into the food processor with half of the tomato paste and grind it again. When it is done, remove the ground beef from the food processor and set aside in a bowl.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-6"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Next add the sausage with the second half of the tomato paste and add to the bowl of ground beef and mix well.",
+                "name": "Next add the sausage with the second half of the tomato paste and add to the bowl of ground beef and mix well.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-7"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "In a smaller food processor if you have one, or in the same food processor rinsed out add 16 ounces of mozzarella cheese, the eggs and the ricotta cheese and grind.",
+                "name": "In a smaller food processor if you have one, or in the same food processor rinsed out add 16 ounces of mozzarella cheese, the eggs and the ricotta cheese and grind.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-8"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Pour the cheese mixture into a small bowl and stir in the Parmesan cheese.",
+                "name": "Pour the cheese mixture into a small bowl and stir in the Parmesan cheese.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-9"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Now all of the lasagna ingredients are prepped and it is time to layer the lasagna!",
+                "name": "Now all of the lasagna ingredients are prepped and it is time to layer the lasagna!",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-0-10"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Spray a 9x13 pan with non stick cooking spray. Then spread out a thin layer of sauce on the bottom of the dish.",
+                "name": "Spray a 9x13 pan with non stick cooking spray. Then spread out a thin layer of sauce on the bottom of the dish.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-1-0"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Top the noodles with a layer of sauce.",
+                "name": "Top the noodles with a layer of sauce.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-1-1"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Top the sauce with a layer of meat mixture.",
+                "name": "Top the sauce with a layer of meat mixture.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-1-2"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Add a layer of the cheese mixture.",
+                "name": "Add a layer of the cheese mixture.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-1-3"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Repeat the layering until you are at the top of the baking dish.",
+                "name": "Repeat the layering until you are at the top of the baking dish.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-1-4"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Spread the remaining sauce on top and then sprinkle a cup of mozzarella cheese on top.",
+                "name": "Spread the remaining sauce on top and then sprinkle a cup of mozzarella cheese on top.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-1-5"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Now you can either put the lasagna in the oven to bake or cover with a layer of tin foil and put it in the fridge for later.",
+                "name": "Now you can either put the lasagna in the oven to bake or cover with a layer of tin foil and put it in the fridge for later.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-1-6"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Leave the lasagna covered with tin foil and bake in the oven at 375 degrees for 45 minutes.",
+                "name": "Leave the lasagna covered with tin foil and bake in the oven at 375 degrees for 45 minutes.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-2-0"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Remove the tinfoil and bake for another 15 minutes or until its golden brown.",
+                "name": "Remove the tinfoil and bake for another 15 minutes or until its golden brown.",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-2-1"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Let it sit for 15 minutes before cutting. (This is VERY IMPORTANT!)",
+                "name": "Let it sit for 15 minutes before cutting. (This is VERY IMPORTANT!)",
+                "url": "https://www.midgetmomma.com/homemade-lasagna/#wprm-recipe-188416-step-2-2"
             }
         ],
         "recipeCategory": [
@@ -2881,92 +2863,74 @@
         ],
         "recipeInstructions": [
             {
-                "@type": "HowToSection",
-                "name": "Make the Dough:",
-                "itemListElement": [
-                    {
-                        "@type": "HowToStep",
-                        "text": "In a small saucepan set over medium-high heat, warm the milk until wisps of steam start to rise from the surface and the milk feels warm to the touch, around 110F.",
-                        "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-1"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "In the bowl of a stand mixer fitted with a dough hook, combine the warm milk with yeast and 1 tbsp sugar. Set aside for 5-10 minutes, or until frothy. (If the mixture doesn't look foamy after 10 minutes, your yeast is past its prime. You'll need to get a fresh container of yeast and start again.)",
-                        "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-2"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Add the rest of the sugar, along with the eggs, butter, vanilla and salt. Add the flour and beat on low speed until the dough starts to come together, then increase the speed to medium-high and beat for 5 minutes or until the dough pulls away from the sides of the bowl into a smooth ball. The dough should be soft, but not overly sticky.",
-                        "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-3"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Transfer the dough to a lightly oiled bowl, and cover tightly with plastic wrap. Set aside to rise in a warm, draft-free spot until doubled in size, around 60-90 minutes.",
-                        "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-3"
-                    }
-                ]
+                "@type": "HowToStep",
+                "text": "In a small saucepan set over medium-high heat, warm the milk until wisps of steam start to rise from the surface and the milk feels warm to the touch, around 110F.",
+                "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-1"
             },
             {
-                "@type": "HowToSection",
-                "name": "Shape the Loaves:",
-                "itemListElement": [
-                    {
-                        "@type": "HowToStep",
-                        "text": "Generously butter two 9-inch springform pans. If your cranberry sauce is very chunky, use an immersion blender or food processor to partially puree - you want it to be mostly smooth, with a few visible berries still remaining.",
-                        "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-4"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Punch down the dough, then transfer to a lightly floured work surface, punch it down to release the air. Divide the dough into two pieces and roll into balls.",
-                        "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-6"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Working with one ball at a time, roll out into a 9x13-inch rectangle. Leaving a 1-inch border on either side, brush the dough with half of the melted butter, then sprinkle with half of the sugar. Spread half of the cranberry sauce over top. Starting from one of the shorter sides, roll up like a jelly roll.",
-                        "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-7"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Using a sharp knife, slice through the roll lengthwise through the seam. With the cut sides facing up, criss-cross the two halves to make an X. Twist the top and bottom parts of the X, then twist to form a spiral. Carefully transfer to one of the prepared springform pans.",
-                        "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-8"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Repeat steps 3 and 4 with the remaining dough and filling ingredients.",
-                        "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-9"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Cover the pans with plastic wrap or a clean dishtowel, and set aside to rise for 45 minutes. The twists will not be doubled in size, but should look slightly puffed.",
-                        "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-10"
-                    }
-                ]
+                "@type": "HowToStep",
+                "text": "In the bowl of a stand mixer fitted with a dough hook, combine the warm milk with yeast and 1 tbsp sugar. Set aside for 5-10 minutes, or until frothy. (If the mixture doesn't look foamy after 10 minutes, your yeast is past its prime. You'll need to get a fresh container of yeast and start again.)",
+                "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-2"
             },
             {
-                "@type": "HowToSection",
-                "name": "Bake and Frost the Bread:",
-                "itemListElement": [
-                    {
-                        "@type": "HowToStep",
-                        "text": "While the bread is rising, preheat the oven to 350F.",
-                        "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-6"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Bake for 40-45 minutes, or until the loaves are golden brown all over. (If the top is browning too quickly, you can loosely cover with aluminum foil.) Let cool for 5 minutes, then remove the outer ring of the springform pan and transfer to a wire rack to cool completely.",
-                        "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-12"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "While the bread is cooling, prepare the icing by whisking together the icing sugar, milk and almond extract until smooth. The icing should be thick but pourable - if it's too runny, add a spoonful of icing sugar, and if it's too thick, add a few more drops of milk.",
-                        "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-13"
-                    },
-                    {
-                        "@type": "HowToStep",
-                        "text": "Drizzle the cooled bread with icing. Let stand for about 10 minutes to allow the icing to set before slicing and serving.",
-                        "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-7"
-                    }
-                ]
+                "@type": "HowToStep",
+                "text": "Add the rest of the sugar, along with the eggs, butter, vanilla and salt. Add the flour and beat on low speed until the dough starts to come together, then increase the speed to medium-high and beat for 5 minutes or until the dough pulls away from the sides of the bowl into a smooth ball. The dough should be soft, but not overly sticky.",
+                "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-3"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Transfer the dough to a lightly oiled bowl, and cover tightly with plastic wrap. Set aside to rise in a warm, draft-free spot until doubled in size, around 60-90 minutes.",
+                "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-3"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Generously butter two 9-inch springform pans. If your cranberry sauce is very chunky, use an immersion blender or food processor to partially puree - you want it to be mostly smooth, with a few visible berries still remaining.",
+                "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-4"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Punch down the dough, then transfer to a lightly floured work surface, punch it down to release the air. Divide the dough into two pieces and roll into balls.",
+                "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-6"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Working with one ball at a time, roll out into a 9x13-inch rectangle. Leaving a 1-inch border on either side, brush the dough with half of the melted butter, then sprinkle with half of the sugar. Spread half of the cranberry sauce over top. Starting from one of the shorter sides, roll up like a jelly roll.",
+                "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-7"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Using a sharp knife, slice through the roll lengthwise through the seam. With the cut sides facing up, criss-cross the two halves to make an X. Twist the top and bottom parts of the X, then twist to form a spiral. Carefully transfer to one of the prepared springform pans.",
+                "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-8"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Repeat steps 3 and 4 with the remaining dough and filling ingredients.",
+                "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-9"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Cover the pans with plastic wrap or a clean dishtowel, and set aside to rise for 45 minutes. The twists will not be doubled in size, but should look slightly puffed.",
+                "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-10"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "While the bread is rising, preheat the oven to 350F.",
+                "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-6"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Bake for 40-45 minutes, or until the loaves are golden brown all over. (If the top is browning too quickly, you can loosely cover with aluminum foil.) Let cool for 5 minutes, then remove the outer ring of the springform pan and transfer to a wire rack to cool completely.",
+                "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-12"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "While the bread is cooling, prepare the icing by whisking together the icing sugar, milk and almond extract until smooth. The icing should be thick but pourable - if it's too runny, add a spoonful of icing sugar, and if it's too thick, add a few more drops of milk.",
+                "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-13"
+            },
+            {
+                "@type": "HowToStep",
+                "text": "Drizzle the cooled bread with icing. Let stand for about 10 minutes to allow the icing to set before slicing and serving.",
+                "url": "https://www.crumbblog.com/cranberry-danish-twist-bread/#instruction-step-7"
             }
         ],
         "prepTime": "PT-452075H23M42S",
