@@ -98,6 +98,12 @@ type Vote struct {
 	RecipeId string `json:"recipe_id"`
 }
 
+// PostApiRecipeCUploadMultipartBody defines parameters for PostApiRecipeCUpload.
+type PostApiRecipeCUploadMultipartBody struct {
+	File     *openapi_types.File `json:"file,omitempty"`
+	RecipeId *string             `json:"recipe_id,omitempty"`
+}
+
 // PostApiRecipeCCreateJSONRequestBody defines body for PostApiRecipeCCreate for application/json ContentType.
 type PostApiRecipeCCreateJSONRequestBody = Recipe
 
@@ -106,6 +112,9 @@ type PostApiRecipeCDeleteJSONRequestBody = Id
 
 // PostApiRecipeCUpdateJSONRequestBody defines body for PostApiRecipeCUpdate for application/json ContentType.
 type PostApiRecipeCUpdateJSONRequestBody = RecipeWithId
+
+// PostApiRecipeCUploadMultipartRequestBody defines body for PostApiRecipeCUpload for multipart/form-data ContentType.
+type PostApiRecipeCUploadMultipartRequestBody PostApiRecipeCUploadMultipartBody
 
 // PostApiRecipeCVoteJSONRequestBody defines body for PostApiRecipeCVote for application/json ContentType.
 type PostApiRecipeCVoteJSONRequestBody = Vote
@@ -130,6 +139,9 @@ type ServerInterface interface {
 	// Update recipe
 	// (POST /api/recipe/c/update)
 	PostApiRecipeCUpdate(w http.ResponseWriter, r *http.Request)
+	// Upload recipe photo
+	// (POST /api/recipe/c/upload)
+	PostApiRecipeCUpload(w http.ResponseWriter, r *http.Request)
 	// Vote for recipe
 	// (POST /api/recipe/c/vote)
 	PostApiRecipeCVote(w http.ResponseWriter, r *http.Request)
@@ -192,6 +204,21 @@ func (siw *ServerInterfaceWrapper) PostApiRecipeCUpdate(w http.ResponseWriter, r
 
 	var handler = func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.PostApiRecipeCUpdate(w, r)
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler(w, r.WithContext(ctx))
+}
+
+// PostApiRecipeCUpload operation middleware
+func (siw *ServerInterfaceWrapper) PostApiRecipeCUpload(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var handler = func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.PostApiRecipeCUpload(w, r)
 	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -394,6 +421,8 @@ func HandlerWithOptions(si ServerInterface, options GorillaServerOptions) http.H
 	r.HandleFunc(options.BaseURL+"/api/recipe/c/delete", wrapper.PostApiRecipeCDelete).Methods("POST")
 
 	r.HandleFunc(options.BaseURL+"/api/recipe/c/update", wrapper.PostApiRecipeCUpdate).Methods("POST")
+
+	r.HandleFunc(options.BaseURL+"/api/recipe/c/upload", wrapper.PostApiRecipeCUpload).Methods("POST")
 
 	r.HandleFunc(options.BaseURL+"/api/recipe/c/vote", wrapper.PostApiRecipeCVote).Methods("POST")
 

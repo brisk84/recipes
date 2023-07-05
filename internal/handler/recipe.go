@@ -2,6 +2,7 @@ package handler
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 	"recipes/api"
 	"recipes/domain"
@@ -184,5 +185,46 @@ func (h *Handler) PostApiRecipeCVote(w http.ResponseWriter, r *http.Request) {
 		sendResponse[NilType](w, nil, err)
 		return
 	}
+	sendResponse(w, "OK", nil)
+}
+
+func (h *Handler) PostApiRecipeCUpload(w http.ResponseWriter, r *http.Request) {
+	// sd := r.Context().Value("SessionData")
+	// if sd == nil {
+	// 	w.WriteHeader(http.StatusUnauthorized)
+	// 	return
+	// }
+	// req, err := parseRequest[api.Vote](r)
+	// if err != nil {
+	// 	h.lg.Errorln(err)
+	// 	sendResponse[NilType](w, nil, err)
+	// 	return
+	// }
+	// var reqd domain.Vote
+	// err = reqd.FromApi(req)
+	// if err != nil {
+	// 	h.lg.Errorln(err)
+	// 	sendResponse[NilType](w, nil, err)
+	// 	return
+	// }
+	// if reqd.Mark < 1 || reqd.Mark > 5 {
+	// 	w.WriteHeader(http.StatusUnprocessableEntity)
+	// 	return
+	// }
+	// reqd.UserId = sd.(*domain.SessionData).Login
+	// reqd.CrDt = time.Now()
+	// err = h.uc.VoteRecipe(r.Context(), reqd)
+	// if err != nil {
+	// 	if errors.Is(err, domain.ErrDuplicateRecord) {
+	// 		w.WriteHeader(http.StatusConflict)
+	// 		return
+	// 	}
+	// 	h.lg.Errorln(err)
+	// 	sendResponse[NilType](w, nil, err)
+	// 	return
+	// }
+	r.ParseMultipartForm(0)
+	fmt.Println(r.FormValue("recipe_id"))
+	fmt.Println(r.FormValue("file"))
 	sendResponse(w, "OK", nil)
 }

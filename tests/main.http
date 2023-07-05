@@ -144,7 +144,17 @@ POST {{apil}}/api/recipe/q/read
 Content-Type: application/json
 
 {
-    "id": "e3bb72e1-1a6e-11ee-a87e-047c165324e7"
+    "id": "e3ba3b81-1a6e-11ee-a87e-047c165324e7"
+}
+
+###
+POST {{apil}}/api/recipe/c/vote
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "recipe_id": "e3ba3b81-1a6e-11ee-a87e-047c165324e7",
+    "mark": 5
 }
 
 ###
@@ -157,18 +167,8 @@ Content-Type: application/json
     "2 oz gin",
     "Club soda"
   ],
-  "max_time": 130,
+  "max_time": 160,
   "sort_by_time": "asc",
   "min_rating": 3,
   "sort_by_rating": "desc"
-}
-
-###
-POST {{apil}}/api/recipe/c/vote
-Authorization: Bearer {{token}}
-Content-Type: application/json
-
-{
-    "recipe_id": "e3bb72e1-1a6e-11ee-a87e-047c165324e7",
-    "mark": 5
 }

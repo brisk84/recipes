@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"math"
 	"recipes/domain"
+	"strconv"
 	"time"
 
 	"github.com/lib/pq"
@@ -14,8 +15,8 @@ import (
 
 func (s *storage) WriteRecipe(ctx context.Context, req domain.Recipe) error {
 	q01 := `insert into recipes (id, cr_dt, del_dt, user_id, title, description,
-		ingredients, steps, total_time)
-	values ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+		ingredients, steps, total_time, rating)
+	values ($1, $2, $3, $4, $5, $6, $7, $8, $9, 0)
 		on conflict (id) do update
 	set upd_dt = $2, del_dt = $3, user_id = $4, title = $5, description = $6,
 		ingredients = $7, steps = $8, total_time = $9`
@@ -114,17 +115,19 @@ func (s *storage) ReadRecipe(ctx context.Context, req domain.ID) (domain.Recipe,
 func (s *storage) FindRecipe(ctx context.Context, req domain.Query) ([]domain.Recipe, error) {
 	q01 := `select id, title, description, ingredients, steps, total_time, rating from recipes
 				where $1 <@ ingredients and del_dt is null`
-	q02 := ` and total_time <= $2`
-	q05 := ` and rating >= $3`
+	q02 := ` and total_time <= $`
+	q05 := ` and rating >= $`
 
 	var rows *sql.Rows
 	var err error
 	q04 := q01
+	argNo := 2
 	if req.MaxTime > 0 {
-		q04 += q02
+		q04 += q02 + strconv.Itoa(argNo)
+		argNo++
 	}
 	if req.MinRating > 0 {
-		q04 += q05
+		q04 += q05 + strconv.Itoa(argNo)
 	}
 
 	if req.SortByTime != "" || req.SortByRating != "" {
@@ -135,10 +138,11 @@ func (s *storage) FindRecipe(ctx context.Context, req domain.Query) ([]domain.Re
 				q04 += ", "
 			}
 		}
-		if req.SortByTime != "" {
+		if req.SortByRating != "" {
 			q04 += "rating " + req.SortByRating
 		}
 	}
+	fmt.Println(q04)
 	if req.MaxTime > 0 && req.MinRating > 0 {
 		rows, err = s.db.QueryContext(ctx, q04, pq.Array(req.Ingredients), req.MaxTime, req.MinRating)
 	} else if req.MaxTime > 0 && req.MinRating == 0 {

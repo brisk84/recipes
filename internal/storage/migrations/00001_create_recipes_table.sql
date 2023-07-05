@@ -10,6 +10,7 @@ CREATE TABLE if not exists recipes (
 	ingredients _text NULL,
 	steps jsonb NULL,
 	total_time int4 NOT NULL,
+	rating real NOT NULL,
 	CONSTRAINT recipes_pkey PRIMARY KEY (id)
 );
 

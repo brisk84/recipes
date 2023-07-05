@@ -13,6 +13,12 @@ func New(h *handler.Handler) http.Handler {
 	r.Use(h.AuthMiddleware)
 	r.Use(SetJSONHeader)
 	r.HandleFunc("/health", h.HealthCheck).Methods(http.MethodGet)
+	// c := cors.New(cors.Options{
+	// 	AllowedOrigins:   []string{"http://localhost:8000"},
+	// 	AllowCredentials: true,
+	// })
+	// handler := c.Handler(r)
+	// api.HandlerFromMux()
 	apiRouter := api.HandlerWithOptions(h, api.GorillaServerOptions{BaseRouter: r})
 	return apiRouter
 }

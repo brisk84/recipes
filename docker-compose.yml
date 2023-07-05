@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 
 services:
   db:
@@ -8,7 +8,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - pgdata1:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_USER: postgres
@@ -33,11 +33,29 @@ services:
       timeout: 10s
       retries: 5
 
+  minio:
+    image: minio/minio
+    container_name: minio
+    command: server --console-address ":9001" /data/
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: m1n1oFSo
+    volumes:
+      - minio-storage:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
   recipes:
     restart: always
     container_name: recipes
     build:
-      context: ./..
+      context: ./
       dockerfile: Dockerfile
     command: sh -c "/usr/local/bin/app"
     network_mode: host
@@ -46,6 +64,9 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      minio:
+        condition: service_healthy
 
 volumes:
-  pgdata1:
+  pgdata:
+  minio-storage:

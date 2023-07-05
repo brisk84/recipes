@@ -13,13 +13,13 @@ generate:
 	cd api; oapi-codegen --package=api --generate types,gorilla -o recipes-srv.gen.go recipes.yml; cd ..
 
 docker_build:
-	docker-compose -f deploy/docker-compose.yml build
+	docker-compose -f docker-compose.yml build
 
 up:
-	docker-compose -f deploy/docker-compose.yml up -d
+	docker-compose -f docker-compose.yml up -d
 
 down:
-	docker-compose -f deploy/docker-compose.yml down --remove-orphans
+	docker-compose -f docker-compose.yml down --remove-orphans
 
 run:
 	export PG_URI="postgresql://localhost/recipes?user=postgres&password=sqlRec1pe58&sslmode=disable"
