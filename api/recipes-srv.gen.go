@@ -11,10 +11,16 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Defines values for QuerySortByRating.
+const (
+	QuerySortByRatingAsc  QuerySortByRating = "asc"
+	QuerySortByRatingDesc QuerySortByRating = "desc"
+)
+
 // Defines values for QuerySortByTime.
 const (
-	Asc  QuerySortByTime = "asc"
-	Desc QuerySortByTime = "desc"
+	QuerySortByTimeAsc  QuerySortByTime = "asc"
+	QuerySortByTimeDesc QuerySortByTime = "desc"
 )
 
 // Id defines model for Id.
@@ -24,10 +30,15 @@ type Id struct {
 
 // Query defines model for Query.
 type Query struct {
-	Ingredients *[]string        `json:"ingredients,omitempty"`
-	MaxTime     *int             `json:"max_time,omitempty"`
-	SortByTime  *QuerySortByTime `json:"sort_by_time,omitempty"`
+	Ingredients  *[]string          `json:"ingredients,omitempty"`
+	MaxTime      *int               `json:"max_time,omitempty"`
+	MinRating    *float64           `json:"min_rating,omitempty"`
+	SortByRating *QuerySortByRating `json:"sort_by_rating,omitempty"`
+	SortByTime   *QuerySortByTime   `json:"sort_by_time,omitempty"`
 }
+
+// QuerySortByRating defines model for Query.SortByRating.
+type QuerySortByRating string
 
 // QuerySortByTime defines model for Query.SortByTime.
 type QuerySortByTime string
@@ -36,6 +47,7 @@ type QuerySortByTime string
 type Recipe struct {
 	Description string   `json:"description"`
 	Ingredients []string `json:"ingredients"`
+	Rating      *float64 `json:"rating,omitempty"`
 	Steps       []Step   `json:"steps"`
 	Title       string   `json:"title"`
 	TotalTime   int      `json:"total_time"`
@@ -52,6 +64,7 @@ type RecipeWithId struct {
 	Description string             `json:"description"`
 	Id          openapi_types.UUID `json:"id"`
 	Ingredients []string           `json:"ingredients"`
+	Rating      *float64           `json:"rating,omitempty"`
 	Steps       []Step             `json:"steps"`
 	Title       string             `json:"title"`
 	TotalTime   int                `json:"total_time"`
@@ -79,6 +92,12 @@ type User struct {
 	Password string `json:"password"`
 }
 
+// Vote defines model for Vote.
+type Vote struct {
+	Mark     int    `json:"mark"`
+	RecipeId string `json:"recipe_id"`
+}
+
 // PostApiRecipeCCreateJSONRequestBody defines body for PostApiRecipeCCreate for application/json ContentType.
 type PostApiRecipeCCreateJSONRequestBody = Recipe
 
@@ -87,6 +106,9 @@ type PostApiRecipeCDeleteJSONRequestBody = Id
 
 // PostApiRecipeCUpdateJSONRequestBody defines body for PostApiRecipeCUpdate for application/json ContentType.
 type PostApiRecipeCUpdateJSONRequestBody = RecipeWithId
+
+// PostApiRecipeCVoteJSONRequestBody defines body for PostApiRecipeCVote for application/json ContentType.
+type PostApiRecipeCVoteJSONRequestBody = Vote
 
 // PostApiRecipeQFindJSONRequestBody defines body for PostApiRecipeQFind for application/json ContentType.
 type PostApiRecipeQFindJSONRequestBody = Query
@@ -108,6 +130,9 @@ type ServerInterface interface {
 	// Update recipe
 	// (POST /api/recipe/c/update)
 	PostApiRecipeCUpdate(w http.ResponseWriter, r *http.Request)
+	// Vote for recipe
+	// (POST /api/recipe/c/vote)
+	PostApiRecipeCVote(w http.ResponseWriter, r *http.Request)
 	// Find recipe
 	// (POST /api/recipe/q/find)
 	PostApiRecipeQFind(w http.ResponseWriter, r *http.Request)
@@ -167,6 +192,21 @@ func (siw *ServerInterfaceWrapper) PostApiRecipeCUpdate(w http.ResponseWriter, r
 
 	var handler = func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.PostApiRecipeCUpdate(w, r)
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler(w, r.WithContext(ctx))
+}
+
+// PostApiRecipeCVote operation middleware
+func (siw *ServerInterfaceWrapper) PostApiRecipeCVote(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var handler = func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.PostApiRecipeCVote(w, r)
 	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -354,6 +394,8 @@ func HandlerWithOptions(si ServerInterface, options GorillaServerOptions) http.H
 	r.HandleFunc(options.BaseURL+"/api/recipe/c/delete", wrapper.PostApiRecipeCDelete).Methods("POST")
 
 	r.HandleFunc(options.BaseURL+"/api/recipe/c/update", wrapper.PostApiRecipeCUpdate).Methods("POST")
+
+	r.HandleFunc(options.BaseURL+"/api/recipe/c/vote", wrapper.PostApiRecipeCVote).Methods("POST")
 
 	r.HandleFunc(options.BaseURL+"/api/recipe/q/find", wrapper.PostApiRecipeQFind).Methods("POST")
 

@@ -23,6 +23,7 @@ type useCase interface {
 	ListRecipes(ctx context.Context) ([]domain.RecipeForList, error)
 	ReadRecipe(ctx context.Context, req domain.ID) (domain.Recipe, error)
 	FindRecipe(ctx context.Context, req domain.Query) ([]domain.Recipe, error)
+	VoteRecipe(ctx context.Context, req domain.Vote) error
 	SignIn(ctx context.Context, req domain.User) (domain.User, bool, error)
 }
 

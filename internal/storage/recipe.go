@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"math"
 	"recipes/domain"
 	"time"
 
@@ -88,8 +89,9 @@ func (s *storage) ListRecipes(ctx context.Context) ([]domain.RecipeForList, erro
 }
 
 func (s *storage) ReadRecipe(ctx context.Context, req domain.ID) (domain.Recipe, error) {
-	q01 := `select id, title, description, ingredients, steps, total_time from recipes
-				where id = $1 and del_dt is null`
+	q01 := `select id, title, description, ingredients, steps, total_time, rating
+				from recipes
+			where id = $1 and del_dt is null`
 
 	row := s.db.QueryRowContext(ctx, q01, req.Id)
 	if row.Err() != nil {
@@ -98,7 +100,7 @@ func (s *storage) ReadRecipe(ctx context.Context, req domain.ID) (domain.Recipe,
 	var ret domain.Recipe
 	var steps []byte
 	err := row.Scan(&ret.Id, &ret.Title, &ret.Description, pq.Array(&ret.Ingredients),
-		&steps, &ret.TotalTime)
+		&steps, &ret.TotalTime, &ret.Rating)
 	if err != nil {
 		return domain.Recipe{}, fmt.Errorf("rows.Scan: %w", err)
 	}
@@ -110,10 +112,10 @@ func (s *storage) ReadRecipe(ctx context.Context, req domain.ID) (domain.Recipe,
 }
 
 func (s *storage) FindRecipe(ctx context.Context, req domain.Query) ([]domain.Recipe, error) {
-	q01 := `select id, title, description, ingredients, steps, total_time from recipes
+	q01 := `select id, title, description, ingredients, steps, total_time, rating from recipes
 				where $1 <@ ingredients and del_dt is null`
 	q02 := ` and total_time <= $2`
-	q03 := ` order by total_time `
+	q05 := ` and rating >= $3`
 
 	var rows *sql.Rows
 	var err error
@@ -121,11 +123,28 @@ func (s *storage) FindRecipe(ctx context.Context, req domain.Query) ([]domain.Re
 	if req.MaxTime > 0 {
 		q04 += q02
 	}
-	if req.SortByTime != "" {
-		q04 += q03 + req.SortByTime
+	if req.MinRating > 0 {
+		q04 += q05
 	}
-	if req.MaxTime > 0 {
+
+	if req.SortByTime != "" || req.SortByRating != "" {
+		q04 += " order by "
+		if req.SortByTime != "" {
+			q04 += "total_time " + req.SortByTime
+			if req.SortByRating != "" {
+				q04 += ", "
+			}
+		}
+		if req.SortByTime != "" {
+			q04 += "rating " + req.SortByRating
+		}
+	}
+	if req.MaxTime > 0 && req.MinRating > 0 {
+		rows, err = s.db.QueryContext(ctx, q04, pq.Array(req.Ingredients), req.MaxTime, req.MinRating)
+	} else if req.MaxTime > 0 && req.MinRating == 0 {
 		rows, err = s.db.QueryContext(ctx, q04, pq.Array(req.Ingredients), req.MaxTime)
+	} else if req.MaxTime == 0 && req.MinRating > 0 {
+		rows, err = s.db.QueryContext(ctx, q04, pq.Array(req.Ingredients), req.MinRating)
 	} else {
 		rows, err = s.db.QueryContext(ctx, q04, pq.Array(req.Ingredients))
 	}
@@ -140,7 +159,7 @@ func (s *storage) FindRecipe(ctx context.Context, req domain.Query) ([]domain.Re
 	for rows.Next() {
 		var item domain.Recipe
 		err = rows.Scan(&item.Id, &item.Title, &item.Description, pq.Array(&item.Ingredients),
-			&steps, &item.TotalTime)
+			&steps, &item.TotalTime, &item.Rating)
 		if err != nil {
 			return nil, fmt.Errorf("rows.Scan: %w", err)
 		}
@@ -151,4 +170,57 @@ func (s *storage) FindRecipe(ctx context.Context, req domain.Query) ([]domain.Re
 		ret = append(ret, item)
 	}
 	return ret, nil
+}
+
+func (s *storage) VoteRecipe(ctx context.Context, req domain.Vote) error {
+	q01 := `select mark from votes where recipe_id = $1`
+	rows, err := s.db.QueryContext(ctx, q01, req.RecipeId)
+	if err != nil {
+		return fmt.Errorf("s.db.QueryContext: %w", err)
+	}
+	if rows.Err() != nil {
+		return fmt.Errorf("rows.Err(): %w", err)
+	}
+	defer rows.Close()
+	cnt := 1
+	total := req.Mark
+	for rows.Next() {
+		var mark int
+		err = rows.Scan(&mark)
+		if err != nil {
+			return fmt.Errorf("rows.Scan: %w", err)
+		}
+		total += mark
+		cnt++
+	}
+	rating := float64(total) / float64(cnt)
+	rating = math.Floor(rating*100) / 100
+
+	tx, err := s.db.Begin()
+	if err != nil {
+		return fmt.Errorf("tx.Begin: %w", err)
+	}
+	defer tx.Rollback()
+
+	q02 := `insert into votes (cr_dt, recipe_id, user_id, mark) values ($1, $2, $3, $4)`
+	_, err = tx.ExecContext(ctx, q02, req.CrDt, req.RecipeId, req.UserId, req.Mark)
+	if err != nil {
+		pgErr, ok := err.(*pq.Error)
+		if ok && pgErr.Code == "23505" {
+			return domain.ErrDuplicateRecord
+		}
+		return fmt.Errorf("tx.ExecContext: %w", err)
+	}
+
+	q03 := `update recipes set rating = $1 where id = $2`
+	_, err = tx.ExecContext(ctx, q03, rating, req.RecipeId)
+	if err != nil {
+		return fmt.Errorf("tx.ExecContext: %w", err)
+	}
+
+	err = tx.Commit()
+	if err != nil {
+		return fmt.Errorf("tx.Commit: %w", err)
+	}
+	return nil
 }

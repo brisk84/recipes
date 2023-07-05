@@ -13,6 +13,7 @@ type Recipe struct {
 	Ingredients []string `json:"ingredients"`
 	Steps       []Step   `json:"steps"`
 	TotalTime   int      `json:"total_time"`
+	Rating      float64  `json:"rating"`
 }
 
 type RecipeForList struct {

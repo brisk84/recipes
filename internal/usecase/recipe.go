@@ -43,3 +43,7 @@ func (u *usecase) ReadRecipe(ctx context.Context, req domain.ID) (domain.Recipe,
 func (u *usecase) FindRecipe(ctx context.Context, req domain.Query) ([]domain.Recipe, error) {
 	return u.stor.FindRecipe(ctx, req)
 }
+
+func (u *usecase) VoteRecipe(ctx context.Context, req domain.Vote) error {
+	return u.stor.VoteRecipe(ctx, req)
+}

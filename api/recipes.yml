@@ -13,7 +13,7 @@ paths:
   "/api/user/c/signin":
     post:
       tags:
-        - recipe
+        - user
       summary: Sign in
       requestBody:
         content:
@@ -61,6 +61,22 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RecipeWithId"
+
+  "/api/recipe/c/vote":
+    post:
+      tags:
+        - recipe
+      summary: Vote for recipe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Vote"
+      responses:
+        200:
+          description: OK
+        409:
+          description: Duplicate record
 
   "/api/recipe/c/delete":
     post:
@@ -183,6 +199,9 @@ components:
             $ref: '#/components/schemas/Step'
         total_time:
           type: integer
+        rating:
+          type: number
+          format: double
 
     RecipeWithId:
       allOf:
@@ -229,3 +248,21 @@ components:
           enum:
             - asc
             - desc
+        min_rating:
+          type: number
+          format: double
+        sort_by_rating:
+          type: string
+          enum:
+            - asc
+            - desc
+
+    Vote:
+      required:
+        - recipe_id
+        - mark
+      properties:
+        recipe_id:
+          type: string
+        mark:
+          type: integer

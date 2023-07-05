@@ -13,6 +13,7 @@ type storage interface {
 	ListRecipes(ctx context.Context) ([]domain.RecipeForList, error)
 	ReadRecipe(ctx context.Context, req domain.ID) (domain.Recipe, error)
 	FindRecipe(ctx context.Context, req domain.Query) ([]domain.Recipe, error)
+	VoteRecipe(ctx context.Context, req domain.Vote) error
 	ReadUser(ctx context.Context, login string) (domain.User, error)
 }
 
