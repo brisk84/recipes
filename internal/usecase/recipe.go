@@ -32,7 +32,7 @@ func (u *usecase) DeleteRecipe(ctx context.Context, req domain.ID) (domain.ID, e
 	return req, nil
 }
 
-func (u *usecase) ListRecipes(ctx context.Context) ([]domain.Recipe, error) {
+func (u *usecase) ListRecipes(ctx context.Context) ([]domain.RecipeForList, error) {
 	return u.stor.ListRecipes(ctx)
 }
 

@@ -15,6 +15,11 @@ type Recipe struct {
 	TotalTime   int      `json:"total_time"`
 }
 
+type RecipeForList struct {
+	ID
+	Title string `json:"title"`
+}
+
 type Step struct {
 	Title string `json:"title"`
 	Time  int    `json:"time"`

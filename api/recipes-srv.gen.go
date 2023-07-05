@@ -41,6 +41,12 @@ type Recipe struct {
 	TotalTime   int      `json:"total_time"`
 }
 
+// RecipeForList defines model for RecipeForList.
+type RecipeForList struct {
+	Id    openapi_types.UUID `json:"id"`
+	Title string             `json:"title"`
+}
+
 // RecipeWithId defines model for RecipeWithId.
 type RecipeWithId struct {
 	Description string             `json:"description"`
@@ -54,6 +60,11 @@ type RecipeWithId struct {
 // Recipes defines model for Recipes.
 type Recipes struct {
 	Items *[]RecipeWithId `json:"items,omitempty"`
+}
+
+// RecipesForList defines model for RecipesForList.
+type RecipesForList struct {
+	Items *[]RecipeForList `json:"items,omitempty"`
 }
 
 // Step defines model for Step.

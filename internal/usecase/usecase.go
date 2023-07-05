@@ -10,7 +10,7 @@ import (
 type storage interface {
 	WriteRecipe(ctx context.Context, req domain.Recipe) error
 	DeleteRecipe(ctx context.Context, req domain.ID) error
-	ListRecipes(ctx context.Context) ([]domain.Recipe, error)
+	ListRecipes(ctx context.Context) ([]domain.RecipeForList, error)
 	ReadRecipe(ctx context.Context, req domain.ID) (domain.Recipe, error)
 	FindRecipe(ctx context.Context, req domain.Query) ([]domain.Recipe, error)
 	ReadUser(ctx context.Context, login string) (domain.User, error)

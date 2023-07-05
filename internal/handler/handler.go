@@ -20,7 +20,7 @@ type useCase interface {
 	CreateRecipe(ctx context.Context, req domain.Recipe) (domain.Recipe, error)
 	UpdateRecipe(ctx context.Context, req domain.Recipe) (domain.Recipe, error)
 	DeleteRecipe(ctx context.Context, req domain.ID) (domain.ID, error)
-	ListRecipes(ctx context.Context) ([]domain.Recipe, error)
+	ListRecipes(ctx context.Context) ([]domain.RecipeForList, error)
 	ReadRecipe(ctx context.Context, req domain.ID) (domain.Recipe, error)
 	FindRecipe(ctx context.Context, req domain.Query) ([]domain.Recipe, error)
 	SignIn(ctx context.Context, req domain.User) (domain.User, bool, error)

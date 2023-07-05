@@ -91,7 +91,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Recipes"
+                $ref: "#/components/schemas/RecipesForList"
 
   "/api/recipe/q/read":
     post:
@@ -195,6 +195,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RecipeWithId'
+
+    RecipeForList:
+      required:
+        - id
+        - title
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+
+    RecipesForList:
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecipeForList'
 
     Query:
       type: object

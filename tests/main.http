@@ -144,7 +144,7 @@ POST {{apil}}/api/recipe/q/read
 Content-Type: application/json
 
 {
-    "id": "4c5f6e6e-1a71-11ee-82d2-047c165324e7"
+    "id": "e3c957d6-1a6e-11ee-a87e-047c165324e7"
 }
 
 ###

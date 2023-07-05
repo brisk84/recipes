@@ -65,9 +65,8 @@ func (s *storage) DeleteRecipe(ctx context.Context, req domain.ID) error {
 	return nil
 }
 
-func (s *storage) ListRecipes(ctx context.Context) ([]domain.Recipe, error) {
-	q01 := `select id, title, description, ingredients, steps, total_time from recipes
-				where del_dt is null`
+func (s *storage) ListRecipes(ctx context.Context) ([]domain.RecipeForList, error) {
+	q01 := `select id, title from recipes where del_dt is null`
 
 	rows, err := s.db.QueryContext(ctx, q01)
 	if err != nil {
@@ -76,20 +75,14 @@ func (s *storage) ListRecipes(ctx context.Context) ([]domain.Recipe, error) {
 	if rows.Err() != nil {
 		return nil, fmt.Errorf("s.db.QueryContext: %w", rows.Err())
 	}
-	var ret []domain.Recipe
-	var steps []byte
+	var ret []domain.RecipeForList
 	for rows.Next() {
-		var item domain.Recipe
-		err = rows.Scan(&item.Id, &item.Title, &item.Description, pq.Array(&item.Ingredients),
-			&steps, &item.TotalTime)
+		var item domain.RecipeForList
+		err = rows.Scan(&item.Id, &item.Title)
 		if err != nil {
 			return nil, fmt.Errorf("rows.Scan: %w", err)
 		}
 		ret = append(ret, item)
-		err = json.Unmarshal(steps, &item.Steps)
-		if err != nil {
-			return nil, fmt.Errorf("json.Unmarshal: %w", err)
-		}
 	}
 	return ret, nil
 }
