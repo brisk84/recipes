@@ -4,10 +4,10 @@ import (
 	"context"
 	"io"
 	"recipes/domain"
-	"recipes/internal/config"
 	"recipes/pkg/logger"
 )
 
+//go:generate mockery --name=storage --structname=storageMock --filename=storage_mock.go --inpackage
 type storage interface {
 	WriteRecipe(ctx context.Context, req domain.Recipe) error
 	DeleteRecipe(ctx context.Context, req domain.ID) error
@@ -29,7 +29,7 @@ type usecase struct {
 	fs   filestorage
 }
 
-func New(lg logger.Logger, cfg config.Config, stor storage, fs filestorage) (*usecase, error) {
+func New(lg logger.Logger, stor storage, fs filestorage) (*usecase, error) {
 	return &usecase{
 		lg:   lg,
 		stor: stor,

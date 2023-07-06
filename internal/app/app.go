@@ -30,29 +30,7 @@ func New(lg logger.Logger, cfg config.Config) (*App, error) {
 		return nil, fmt.Errorf("filestorage: %w", err)
 	}
 
-	// f, err := os.Open("/tmp/test.txt")
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// defer f.Close()
-	// rd := bufio.NewReader(f)
-	// fmt.Println(rd.Size())
-	// // i, err := mc.PutObject(context.TODO(), "store", "test", rd, int64(rd.Size()), minio.PutObjectOptions{ContentType: "image/png"})
-	// // i, err := mc.PutObject(context.TODO(), bucketName, "test.txt", rd, int64(rd.Size()), minio.PutObjectOptions{ContentType: "plain/text"})
-	// i, err := mc.FPutObject(context.TODO(), bucketName, "test.txt", "/tmp/test.txt", minio.PutObjectOptions{ContentType: "plain/text"})
-
-	// fmt.Println(i, err)
-	// fmt.Println()
-	// fmt.Println()
-	// fmt.Println()
-	// if err != nil {
-	// 	panic(err)
-	// }
-
-	// s, err := rd.ReadString('\n')
-	// fmt.Println(s, err)
-
-	uc, err := usecase.New(lg, cfg, stor, fs)
+	uc, err := usecase.New(lg, stor, fs)
 	if err != nil {
 		return nil, fmt.Errorf("usecase: %w", err)
 	}
