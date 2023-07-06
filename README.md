@@ -1,7 +1,4 @@
-# Recipes [Backend Application] ![GO][go-badge]
-
-[go-badge]: https://img.shields.io/github/go-mod/go-version/p12s/furniture-store?style=plastic
-[go-url]: https://github.com/p12s/furniture-store/blob/master/go.mod
+# Recipes [Backend Application]
 
 ## Build & Run (Locally)
 ### Prerequisites
