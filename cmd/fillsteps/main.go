@@ -17,12 +17,18 @@ func main() {
 	for rows.Next() {
 		var id string
 		var steps []string
-		rows.Scan(&id, pq.Array(&steps))
+		err := rows.Scan(&id, pq.Array(&steps))
+		if err != nil {
+			panic(err)
+		}
 		fmt.Println(id, steps)
 		for _, v := range steps {
 			time := rand.Intn(59) + 1
 			q02 := `insert into steps (title, time, recipe_id) values ($1, $2, $3)`
-			db.Exec(q02, v, time, id)
+			_, err := db.Exec(q02, v, time, id)
+			if err != nil {
+				panic(err)
+			}
 		}
 	}
 }

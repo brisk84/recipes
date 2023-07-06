@@ -54,7 +54,12 @@ func (h *Handler) PostApiUserCSignin(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Add("Authorization", "Bearer "+h.getKey(sd.Token))
 	res := map[string]interface{}{"auth_token": sd.Token}
-	json.NewEncoder(w).Encode(res)
+	err = json.NewEncoder(w).Encode(res)
+	if err != nil {
+		h.lg.Errorln(err)
+		sendResponse[NilType](w, nil, err)
+		return
+	}
 }
 
 func (h *Handler) AuthMiddleware(next http.Handler) http.Handler {
@@ -67,7 +72,7 @@ func (h *Handler) AuthMiddleware(next http.Handler) http.Handler {
 			if err == nil {
 				err = json.Unmarshal(b, &sd)
 				if err == nil {
-					ctx := context.WithValue(r.Context(), "SessionData", &sd)
+					ctx := context.WithValue(r.Context(), domain.SessionDataKey, &sd)
 					r = r.WithContext(ctx)
 				}
 			}

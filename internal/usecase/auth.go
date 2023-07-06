@@ -13,10 +13,10 @@ func (u *usecase) checkPasswordHash(password, hash string) bool {
 	return err == nil
 }
 
-func (u *usecase) hashPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-	return string(bytes), err
-}
+// func (u *usecase) hashPassword(password string) (string, error) {
+// 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+// 	return string(bytes), err
+// }
 
 func (u *usecase) SignIn(ctx context.Context, req domain.User) (domain.User, bool, error) {
 	user, err := u.stor.ReadUser(ctx, req.Login)

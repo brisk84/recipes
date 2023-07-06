@@ -33,7 +33,10 @@ type Recipe2 struct {
 func main() {
 	buf, _ := os.ReadFile("./cmd/load/recipes.json")
 	var rs []Recipe
-	json.Unmarshal(buf, &rs)
+	err := json.Unmarshal(buf, &rs)
+	if err != nil {
+		panic(err)
+	}
 
 	for i := 0; i < 100; i++ {
 		var rec domain.Recipe
@@ -65,7 +68,10 @@ func main() {
 	}
 
 	var rs2 []Recipe2
-	json.Unmarshal(buf, &rs2)
+	err = json.Unmarshal(buf, &rs2)
+	if err != nil {
+		panic(err)
+	}
 	for i := 0; i < 100; i++ {
 		var rec domain.Recipe
 		rec.Title = rs2[i].Name

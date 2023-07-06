@@ -39,5 +39,10 @@ func New(lg logger.Logger, useCase useCase, rcli *redis.Client) *Handler {
 }
 
 func (h *Handler) HealthCheck(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(map[string]bool{"ok": true})
+	err := json.NewEncoder(w).Encode(map[string]bool{"ok": true})
+	if err != nil {
+		h.lg.Errorln(err)
+		sendResponse[NilType](w, nil, err)
+		return
+	}
 }

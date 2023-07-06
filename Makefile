@@ -11,6 +11,7 @@ build: deps
 
 generate:
 	cd api; oapi-codegen --package=api --generate types,gorilla -o recipes-srv.gen.go recipes.yml; cd ..
+	go generate ./...
 
 docker_build:
 	docker-compose -f docker-compose.yml build
@@ -20,6 +21,9 @@ up:
 
 down:
 	docker-compose -f docker-compose.yml down --remove-orphans
+
+lint:
+	golangci-lint run
 
 run:
 	export PG_URI="postgresql://localhost/recipes?user=postgres&password=sqlRec1pe58&sslmode=disable"

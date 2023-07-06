@@ -10,7 +10,7 @@ import (
 )
 
 func (h *Handler) PostApiRecipeCCreate(w http.ResponseWriter, r *http.Request) {
-	sd := r.Context().Value("SessionData")
+	sd := r.Context().Value(domain.SessionDataKey)
 	if sd == nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
@@ -40,7 +40,7 @@ func (h *Handler) PostApiRecipeCCreate(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) PostApiRecipeCUpdate(w http.ResponseWriter, r *http.Request) {
-	sd := r.Context().Value("SessionData")
+	sd := r.Context().Value(domain.SessionDataKey)
 	if sd == nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
@@ -69,7 +69,7 @@ func (h *Handler) PostApiRecipeCUpdate(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) PostApiRecipeCDelete(w http.ResponseWriter, r *http.Request) {
-	sd := r.Context().Value("SessionData")
+	sd := r.Context().Value(domain.SessionDataKey)
 	if sd == nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
@@ -156,7 +156,7 @@ func (h *Handler) PostApiRecipeQFind(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) PostApiRecipeCVote(w http.ResponseWriter, r *http.Request) {
-	sd := r.Context().Value("SessionData")
+	sd := r.Context().Value(domain.SessionDataKey)
 	if sd == nil {
 		w.WriteHeader(http.StatusUnauthorized)
 		return
@@ -195,13 +195,18 @@ func (h *Handler) PostApiRecipeCVote(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) PostApiRecipeCUpload(w http.ResponseWriter, r *http.Request) {
-	// sd := r.Context().Value("SessionData")
+	// sd := r.Context().Value(domain.SessionDataKey)
 	// if sd == nil {
 	// 	w.WriteHeader(http.StatusUnauthorized)
 	// 	return
 	// }
 	h.lg.Infoln("upload")
-	r.ParseMultipartForm(10 << 20)
+	err := r.ParseMultipartForm(10 << 20)
+	if err != nil {
+		h.lg.Errorln(err)
+		sendResponse[NilType](w, nil, err)
+		return
+	}
 	file, handler, err := r.FormFile("file")
 	if err != nil {
 		h.lg.Errorln(err)

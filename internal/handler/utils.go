@@ -16,7 +16,9 @@ func parseRequest[T any](r *http.Request) (T, error) {
 func sendResponse[T any](w http.ResponseWriter, data T, err error) {
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(err)
+		if err2 := json.NewEncoder(w).Encode(err); err2 != nil {
+			panic(err)
+		}
 		return
 	}
 	w.WriteHeader(http.StatusOK)

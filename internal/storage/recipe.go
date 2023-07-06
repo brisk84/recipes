@@ -25,7 +25,7 @@ func (s *storage) WriteRecipe(ctx context.Context, req domain.Recipe) error {
 	if err != nil {
 		return fmt.Errorf("tx.Begin: %w", err)
 	}
-	defer tx.Rollback()
+	defer tx.Rollback() //nolint:all
 
 	steps, err := json.Marshal(req.Steps)
 	if err != nil {
@@ -51,7 +51,7 @@ func (s *storage) DeleteRecipe(ctx context.Context, req domain.ID) error {
 	if err != nil {
 		return fmt.Errorf("tx.Begin: %w", err)
 	}
-	defer tx.Rollback()
+	defer tx.Rollback() //nolint:all
 
 	delDt := time.Now()
 	_, err = tx.ExecContext(ctx, q01, delDt, req.Id)
@@ -203,7 +203,7 @@ func (s *storage) VoteRecipe(ctx context.Context, req domain.Vote) error {
 	if err != nil {
 		return fmt.Errorf("tx.Begin: %w", err)
 	}
-	defer tx.Rollback()
+	defer tx.Rollback() //nolint:all
 
 	q02 := `insert into votes (cr_dt, recipe_id, user_id, mark) values ($1, $2, $3, $4)`
 	_, err = tx.ExecContext(ctx, q02, req.CrDt, req.RecipeId, req.UserId, req.Mark)

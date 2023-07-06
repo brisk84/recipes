@@ -2,6 +2,10 @@ package domain
 
 import "recipes/api"
 
+type sessionData string
+
+const SessionDataKey = sessionData("SessionData")
+
 type SessionData struct {
 	Token string `json:"token"`
 	Login string `json:"login"`

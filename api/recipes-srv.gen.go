@@ -23,8 +23,14 @@ const (
 	QuerySortByTimeDesc QuerySortByTime = "desc"
 )
 
-// File defines model for File.
-type File struct {
+// FileDownload defines model for FileDownload.
+type FileDownload struct {
+	RecipeId string `json:"recipe_id"`
+	Step     string `json:"step"`
+}
+
+// FileUpload defines model for FileUpload.
+type FileUpload struct {
 	File     openapi_types.File `json:"file"`
 	RecipeId string             `json:"recipe_id"`
 	Step     string             `json:"step"`
@@ -116,13 +122,13 @@ type PostApiRecipeCDeleteJSONRequestBody = Id
 type PostApiRecipeCUpdateJSONRequestBody = RecipeWithId
 
 // PostApiRecipeCUploadMultipartRequestBody defines body for PostApiRecipeCUpload for multipart/form-data ContentType.
-type PostApiRecipeCUploadMultipartRequestBody = File
+type PostApiRecipeCUploadMultipartRequestBody = FileUpload
 
 // PostApiRecipeCVoteJSONRequestBody defines body for PostApiRecipeCVote for application/json ContentType.
 type PostApiRecipeCVoteJSONRequestBody = Vote
 
 // PostApiRecipeQDownloadMultipartRequestBody defines body for PostApiRecipeQDownload for multipart/form-data ContentType.
-type PostApiRecipeQDownloadMultipartRequestBody = File
+type PostApiRecipeQDownloadMultipartRequestBody = FileDownload
 
 // PostApiRecipeQFindJSONRequestBody defines body for PostApiRecipeQFind for application/json ContentType.
 type PostApiRecipeQFindJSONRequestBody = Query
