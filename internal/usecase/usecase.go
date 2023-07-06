@@ -18,6 +18,7 @@ type storage interface {
 	ReadUser(ctx context.Context, login string) (domain.User, error)
 }
 
+//go:generate mockery --name=filestorage --structname=filestorageMock --filename=filestorage_mock.go --inpackage
 type filestorage interface {
 	Upload(ctx context.Context, fileName string, fileSize int64, reader io.Reader) error
 	Download(ctx context.Context, fileName string) (io.Reader, error)
