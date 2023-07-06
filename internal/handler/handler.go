@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"encoding/json"
+	"io"
 	"net/http"
 	"recipes/domain"
 	"recipes/pkg/logger"
@@ -24,6 +25,8 @@ type useCase interface {
 	ReadRecipe(ctx context.Context, req domain.ID) (domain.Recipe, error)
 	FindRecipe(ctx context.Context, req domain.Query) ([]domain.Recipe, error)
 	VoteRecipe(ctx context.Context, req domain.Vote) error
+	UploadRecipe(ctx context.Context, req domain.FileInfoUpload) error
+	DownloadRecipe(ctx context.Context, req domain.FileInfoDownload) (io.Reader, error)
 	SignIn(ctx context.Context, req domain.User) (domain.User, bool, error)
 }
 

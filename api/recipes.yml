@@ -105,14 +105,21 @@ paths:
         content:
           multipart/form-data:
             schema:
-              type: object
-              properties:
-                recipe_id:
-                  type: string
-                file:
-                  type: string
-                  format: binary
+              $ref: "#/components/schemas/FileUpload"
+      responses:
+        200:
+          description: OK
 
+  "/api/recipe/q/download":
+    post:
+      tags:
+        - recipe
+      summary: Download recipe photo
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/FileDownload"
       responses:
         200:
           description: OK
@@ -139,14 +146,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Recipe"
+              $ref: "#/components/schemas/Id"
       responses:
         200:
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Recipes"
+                type: array
+                items:
+                  $ref: "#/components/schemas/Recipe"
 
   "/api/recipe/q/find":
     post:
@@ -176,6 +185,7 @@ components:
         id:
           type: string
           format: uuid
+          example: "e3baf40f-1a6e-11ee-a87e-047c165324e7"
 
     User:
       required:
@@ -199,6 +209,7 @@ components:
 
     Recipe:
       required:
+        - id
         - title
         - description
         - ingredients
@@ -206,6 +217,9 @@ components:
         - total_time
       type: object
       properties:
+        id:
+          type: string
+          format: uuid
         title:
           type: string
         description:
@@ -287,3 +301,27 @@ components:
           type: string
         mark:
           type: integer
+
+    FileUpload:
+      required:
+        - recipe_id
+        - step
+        - file
+      properties:
+        recipe_id:
+          type: string
+        step:
+          type: string
+        file:
+          type: string
+          format: binary
+
+    FileDownload:
+      required:
+        - recipe_id
+        - step
+      properties:
+        recipe_id:
+          type: string
+        step:
+          type: string

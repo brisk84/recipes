@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Upload File</title>
+  </head>
+  <body>
+    <form
+      enctype="multipart/form-data"
+      action="http://localhost:8000/api/recipe/c/upload"
+      method="post"
+    >
+      recipe_id <input type="text" name="recipe_id" /><br>
+      step <input type="number" name="step" /><br>
+      <input type="file" name="file" accept="image/png, image/jpeg"/>
+      <input type="submit" value="upload" />
+    </form>
+    <br>
+    <br>
+    <br>
+    <form
+    enctype="multipart/form-data"
+    action="http://localhost:8000/api/recipe/q/download"
+    method="post"
+  >
+    recipe_id <input type="text" name="recipe_id" /><br>
+    step <input type="number" name="step" /><br>
+    <input type="submit" value="download" />
+  </form>
+  </body>
+</html>

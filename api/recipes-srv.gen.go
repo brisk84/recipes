@@ -23,6 +23,13 @@ const (
 	QuerySortByTimeDesc QuerySortByTime = "desc"
 )
 
+// File defines model for File.
+type File struct {
+	File     openapi_types.File `json:"file"`
+	RecipeId string             `json:"recipe_id"`
+	Step     string             `json:"step"`
+}
+
 // Id defines model for Id.
 type Id struct {
 	Id openapi_types.UUID `json:"id"`
@@ -45,12 +52,13 @@ type QuerySortByTime string
 
 // Recipe defines model for Recipe.
 type Recipe struct {
-	Description string   `json:"description"`
-	Ingredients []string `json:"ingredients"`
-	Rating      *float64 `json:"rating,omitempty"`
-	Steps       []Step   `json:"steps"`
-	Title       string   `json:"title"`
-	TotalTime   int      `json:"total_time"`
+	Description string             `json:"description"`
+	Id          openapi_types.UUID `json:"id"`
+	Ingredients []string           `json:"ingredients"`
+	Rating      *float64           `json:"rating,omitempty"`
+	Steps       []Step             `json:"steps"`
+	Title       string             `json:"title"`
+	TotalTime   int                `json:"total_time"`
 }
 
 // RecipeForList defines model for RecipeForList.
@@ -98,12 +106,6 @@ type Vote struct {
 	RecipeId string `json:"recipe_id"`
 }
 
-// PostApiRecipeCUploadMultipartBody defines parameters for PostApiRecipeCUpload.
-type PostApiRecipeCUploadMultipartBody struct {
-	File     *openapi_types.File `json:"file,omitempty"`
-	RecipeId *string             `json:"recipe_id,omitempty"`
-}
-
 // PostApiRecipeCCreateJSONRequestBody defines body for PostApiRecipeCCreate for application/json ContentType.
 type PostApiRecipeCCreateJSONRequestBody = Recipe
 
@@ -114,16 +116,19 @@ type PostApiRecipeCDeleteJSONRequestBody = Id
 type PostApiRecipeCUpdateJSONRequestBody = RecipeWithId
 
 // PostApiRecipeCUploadMultipartRequestBody defines body for PostApiRecipeCUpload for multipart/form-data ContentType.
-type PostApiRecipeCUploadMultipartRequestBody PostApiRecipeCUploadMultipartBody
+type PostApiRecipeCUploadMultipartRequestBody = File
 
 // PostApiRecipeCVoteJSONRequestBody defines body for PostApiRecipeCVote for application/json ContentType.
 type PostApiRecipeCVoteJSONRequestBody = Vote
+
+// PostApiRecipeQDownloadMultipartRequestBody defines body for PostApiRecipeQDownload for multipart/form-data ContentType.
+type PostApiRecipeQDownloadMultipartRequestBody = File
 
 // PostApiRecipeQFindJSONRequestBody defines body for PostApiRecipeQFind for application/json ContentType.
 type PostApiRecipeQFindJSONRequestBody = Query
 
 // PostApiRecipeQReadJSONRequestBody defines body for PostApiRecipeQRead for application/json ContentType.
-type PostApiRecipeQReadJSONRequestBody = Recipe
+type PostApiRecipeQReadJSONRequestBody = Id
 
 // PostApiUserCSigninJSONRequestBody defines body for PostApiUserCSignin for application/json ContentType.
 type PostApiUserCSigninJSONRequestBody = User
@@ -145,6 +150,9 @@ type ServerInterface interface {
 	// Vote for recipe
 	// (POST /api/recipe/c/vote)
 	PostApiRecipeCVote(w http.ResponseWriter, r *http.Request)
+	// Download recipe photo
+	// (POST /api/recipe/q/download)
+	PostApiRecipeQDownload(w http.ResponseWriter, r *http.Request)
 	// Find recipe
 	// (POST /api/recipe/q/find)
 	PostApiRecipeQFind(w http.ResponseWriter, r *http.Request)
@@ -234,6 +242,21 @@ func (siw *ServerInterfaceWrapper) PostApiRecipeCVote(w http.ResponseWriter, r *
 
 	var handler = func(w http.ResponseWriter, r *http.Request) {
 		siw.Handler.PostApiRecipeCVote(w, r)
+	}
+
+	for _, middleware := range siw.HandlerMiddlewares {
+		handler = middleware(handler)
+	}
+
+	handler(w, r.WithContext(ctx))
+}
+
+// PostApiRecipeQDownload operation middleware
+func (siw *ServerInterfaceWrapper) PostApiRecipeQDownload(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var handler = func(w http.ResponseWriter, r *http.Request) {
+		siw.Handler.PostApiRecipeQDownload(w, r)
 	}
 
 	for _, middleware := range siw.HandlerMiddlewares {
@@ -425,6 +448,8 @@ func HandlerWithOptions(si ServerInterface, options GorillaServerOptions) http.H
 	r.HandleFunc(options.BaseURL+"/api/recipe/c/upload", wrapper.PostApiRecipeCUpload).Methods("POST")
 
 	r.HandleFunc(options.BaseURL+"/api/recipe/c/vote", wrapper.PostApiRecipeCVote).Methods("POST")
+
+	r.HandleFunc(options.BaseURL+"/api/recipe/q/download", wrapper.PostApiRecipeQDownload).Methods("POST")
 
 	r.HandleFunc(options.BaseURL+"/api/recipe/q/find", wrapper.PostApiRecipeQFind).Methods("POST")
 

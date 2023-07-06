@@ -142,7 +142,6 @@ func (s *storage) FindRecipe(ctx context.Context, req domain.Query) ([]domain.Re
 			q04 += "rating " + req.SortByRating
 		}
 	}
-	fmt.Println(q04)
 	if req.MaxTime > 0 && req.MinRating > 0 {
 		rows, err = s.db.QueryContext(ctx, q04, pq.Array(req.Ingredients), req.MaxTime, req.MinRating)
 	} else if req.MaxTime > 0 && req.MinRating == 0 {

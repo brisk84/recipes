@@ -3,6 +3,7 @@ package usecase
 import (
 	"context"
 	"fmt"
+	"io"
 	"recipes/domain"
 	"recipes/pkg/tools"
 )
@@ -46,4 +47,20 @@ func (u *usecase) FindRecipe(ctx context.Context, req domain.Query) ([]domain.Re
 
 func (u *usecase) VoteRecipe(ctx context.Context, req domain.Vote) error {
 	return u.stor.VoteRecipe(ctx, req)
+}
+
+func (u *usecase) UploadRecipe(ctx context.Context, req domain.FileInfoUpload) error {
+	err := u.fs.Upload(ctx, req.Id+"_"+req.Step, req.Size, req.Reader)
+	if err != nil {
+		return fmt.Errorf("u.fs.Upload: %w", err)
+	}
+	return nil
+}
+
+func (u *usecase) DownloadRecipe(ctx context.Context, req domain.FileInfoDownload) (io.Reader, error) {
+	reader, err := u.fs.Download(ctx, req.Id+"_"+req.Step)
+	if err != nil {
+		return nil, fmt.Errorf("u.fs.Download: %w", err)
+	}
+	return reader, nil
 }
